@@ -15,14 +15,14 @@ export default function Home() {
   const [list, setList] = useState([1, 2, 3])
   
   // we did not really pass any data up to our parent component when the onClick event is fired but we can easily do that through our function. 
-  function addValue() {
+  function addValue({incrementValue}) {
 
     // calculating the largest number in our current array and adding 1 to it.
     // To pass data from a parent to a child component, we pass them as attributes 
     // To pass data to from a child component is a little more indirect, we pass a function to the child component which the child component can call to pass data back to the parent component. 
     // for example now our addValue is passed as attribute to list items and the distructured back{incoming parameter} to the child component  as a received value then we can have a button that calls.  
 
-    const newVal = Math.max(...list) + 1;
+    const newVal = Math.max(...list) + incrementValue;
     setList([...list, newVal]);
 
 
@@ -33,11 +33,12 @@ export default function Home() {
 
   function ListItems({list, addValue}) {
 
+    const increment = 3;
 
     return (
       <>
 
-      <button onClick={addValue}>Add Value</button>
+      <button onClick={() => addValue(increment)}>Add Item</button>
         { 
           list.map(id =>{
             return(
